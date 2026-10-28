@@ -1,6 +1,17 @@
-# ShowMeLive Backend API
+# CutFlow API
 
-A complete NestJS (Node.js/TypeScript) backend for the AI Video Creation Platform.
+![CI](https://github.com/alliii1364/cutflow-api/actions/workflows/ci.yml/badge.svg)
+
+NestJS (Node.js/TypeScript) backend for CutFlow, an AI video creation platform. It handles users, billing, media storage and AI processing jobs: captions, script generation, voiceover, silence removal and export.
+
+## Architecture
+
+```
+Client -> NestJS API -> PostgreSQL (Prisma)
+                     -> Redis / BullMQ -> workers (FFmpeg, Whisper, GPT, ElevenLabs)
+                     -> S3 (uploads and exports)
+                     -> Stripe (billing webhooks)
+```
 
 ## Features
 
@@ -105,7 +116,7 @@ npm run start:dev
 |---------|-----|-------------|
 | API | http://localhost:3000 | - |
 | API Docs | http://localhost:3000/api/docs | - |
-| PgAdmin | http://localhost:5050 | admin@cutflow.app / admin |
+| PgAdmin | http://localhost:5050 | local dev only, set in `docker-compose.yml` |
 | Redis Insight | http://localhost:5540 | - |
 
 See [DOCKER.md](DOCKER.md) for detailed Docker instructions.
@@ -279,3 +290,7 @@ See [DOCKER.md](DOCKER.md) for platform-specific deployment guides.
 ## License
 
 UNLICENSED
+
+## Author
+
+Sheikh Ali Asif ([@alliii1364](https://github.com/alliii1364))
